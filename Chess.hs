@@ -29,6 +29,10 @@ type Position   = (Letter, Integer)
 type Piece      = (ChessPiece, Color)
 type Square     = (Position, Piece)
 
+
+showHelper :: Square -> String -> Text
+showHelper ((l,n),(piece,  color)) icon = T.pack $ show l ++ show n ++ icon
+
 showSquare :: Square -> Text
 showSquare ((l,n),(Rook,  Black)) = T.pack $ show l ++ show n ++ "♜"
 showSquare ((l,n),(Bishop,Black)) = T.pack $ show l ++ show n ++ "♝"
@@ -64,7 +68,7 @@ blackRoyalRow, blackPawnRow, whitePawnRow, whiteRoyalRow :: [Square]
 blackRoyalRow   = zip [ (l,8) | l <- [A .. H] ] $ zip [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook] (repeat Black)
 whiteRoyalRow   = zip [ (l,1) | l <- [A .. H] ] $ zip [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook] (repeat White)
 blackPawnRow    = zip [ (l,7) | l <- [A .. H] ] $ repeat (Pawn, Black)
-whitePawnRow    = zip [ (l,2) | l <- [A .. H] ] $ repeat (Pawn, Black)
+whitePawnRow    = zip [ (l,2) | l <- [A .. H] ] $ repeat (Pawn, White)
 
 emptyRow :: Integer -> [Square]
 emptyRow n = zip [ (l,n) | l <- [A .. H] ] $ repeat (Empty, None)
